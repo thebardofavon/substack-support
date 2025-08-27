@@ -34,19 +34,53 @@
         .instructions {
             margin-top: 10px;
             line-height: 1.6;
+            text-align: left;
         }
         .qr-code {
             max-width: 200px;
             height: auto;
             margin: 10px auto;
         }
-        pre {
+        .copy-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background-color: #eee;
             padding: 10px;
             border-radius: 5px;
+            margin-bottom: 10px;
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        .copy-text {
+            flex-grow: 1;
+        }
+        .copy-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+        .copy-button:hover {
+            background-color: #2980b9;
+        }
+        .remitly-link {
             display: inline-block;
-            font-size: 1.1em;
-            word-wrap: break-word;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .remitly-link:hover {
+            background-color: #27ae60;
         }
     </style>
 </head>
@@ -59,9 +93,12 @@
             <h2>For Readers in India (UPI)</h2>
             <p>Scan the QR code or use my UPI ID to contribute any amount you wish.</p>
             <img src="your-qr-code.png" alt="UPI QR Code" class="qr-code">
-            <div class="instructions">
+            <div class="instructions" style="text-align: center;">
                 <strong>My UPI ID:</strong>
-                <pre>sri.anushka03-1@okaxis</pre>
+                <div class="copy-container">
+                    <span id="upiIdText" class="copy-text">sri.anushka03-1@okaxis</span>
+                    <button class="copy-button" onclick="copyText('upiIdText')">Copy</button>
+                </div>
             </div>
         </div>
 
@@ -69,18 +106,40 @@
             <h2>For International Supporters (Remitly)</h2>
             <p>You can send a one-time contribution via Remitly. It's a fast and secure way to transfer money directly to my bank account.</p>
             <div class="instructions">
-                <p>1. Open the Remitly app or website on your phone or computer.</p>
-                <p>2. Select "India" as the recipient country and choose direct bank deposit.</p>
-                <p>3. Enter my details below to complete the transfer.</p>
+                <p>1. Open the Remitly website to start a transfer. <br><a href="https://www.remitly.com/" target="_blank" class="remitly-link">Go to Remitly</a></p>
+                <p>2. Select "India" as the recipient country and choose a direct bank deposit.</p>
+                <p>3. Enter my details below to complete the transfer. You can copy each detail for convenience.</p>
                 <p>
-                    <strong>Recipient Details:</strong><br>
-                    <strong>Full Name:</strong> Anushka Srivastava<br>
-                    <strong>Bank Account No.:</strong> 41449185065<br>
-                    <strong>Bank Name & IFSC Code:</strong> State Bank of India & SBIN0003823<br>
+                    <strong>Recipient Details:</strong>
                 </p>
-                <p>Remitly handles the currency conversion, and the funds will be deposited directly into my account.</p>
+                <div class="copy-container">
+                    <span>Full Name:</span>
+                    <span id="fullNameText" class="copy-text"> Anushka Srivastava</span>
+                    <button class="copy-button" onclick="copyText('fullNameText')">Copy</button>
+                </div>
+                <div class="copy-container">
+                    <span>Bank Account No.:</span>
+                    <span id="accountNoText" class="copy-text"> 41449185065</span>
+                    <button class="copy-button" onclick="copyText('accountNoText')">Copy</button>
+                </div>
+                <div class="copy-container">
+                    <span>Bank Name & IFSC Code:</span>
+                    <span id="bankDetailsText" class="copy-text"> State Bank of India & SBIN0003823</span>
+                    <button class="copy-button" onclick="copyText('bankDetailsText')">Copy</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy text: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
