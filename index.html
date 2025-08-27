@@ -11,10 +11,11 @@
             padding: 20px;
             background-color: #f4f4f4;
             color: #333;
+            margin: 0;
         }
         .container {
             max-width: 600px;
-            margin: auto;
+            margin: 20px auto;
             background: #fff;
             padding: 30px;
             border-radius: 8px;
@@ -22,6 +23,7 @@
         }
         h1 {
             color: #2c3e50;
+            font-size: 2em;
         }
         .payment-option {
             margin-top: 30px;
@@ -30,6 +32,7 @@
         }
         .payment-option h2 {
             color: #2980b9;
+            font-size: 1.5em;
         }
         .instructions {
             margin-top: 10px;
@@ -37,24 +40,26 @@
             text-align: left;
         }
         .qr-code {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
             margin: 10px auto;
         }
         .copy-container {
             position: relative;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column; /* Stack on smaller screens */
+            align-items: flex-start;
             background-color: #eee;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
             overflow-wrap: break-word;
             word-break: break-all;
+            text-align: left;
         }
         .copy-text {
             flex-grow: 1;
+            padding-right: 10px;
         }
         .copy-button {
             background-color: #3498db;
@@ -63,8 +68,10 @@
             padding: 8px 12px;
             border-radius: 4px;
             cursor: pointer;
-            margin-left: 10px;
+            margin-left: 0;
+            margin-top: 10px; /* Add margin on top for mobile */
             font-size: 0.9em;
+            width: 100%; /* Full width button on mobile */
         }
         .copy-button:hover {
             background-color: #2980b9;
@@ -81,6 +88,20 @@
         }
         .remitly-link:hover {
             background-color: #27ae60;
+        }
+        
+        /* === MEDIA QUERY FOR DESKTOP === */
+        @media (min-width: 601px) {
+            .copy-container {
+                flex-direction: row; /* Row layout on larger screens */
+                align-items: center;
+                justify-content: space-between;
+            }
+            .copy-button {
+                width: auto;
+                margin-top: 0;
+                margin-left: 10px;
+            }
         }
     </style>
 </head>
@@ -106,31 +127,30 @@
             <h2>For International Supporters (Remitly)</h2>
             <p>You can send a one-time contribution via Remitly. It's a fast and secure way to transfer money directly to my bank account.</p>
             <div class="instructions">
-                <p>1. Open the Remitly website or app to start a transfer. <br><a href="https://www.remitly.com/" target="_blank" class="remitly-link">Go to Remitly</a></p>
+                <p>1. Open the Remitly website to start a transfer. <br><a href="https://www.remitly.com/" target="_blank" class="remitly-link">Go to Remitly</a></p>
                 <p>2. Select "India" as the recipient country and choose a direct bank deposit or UPI ID given above as per your choice.</p>
                 <p>3. Enter my details below to complete the transfer. You can copy each detail for convenience.</p>
                 <p>
                     <strong>Recipient Details:</strong>
                 </p>
                 <div class="copy-container">
-                    <span>Full Name:</span>
-                    <span id="fullNameText" class="copy-text"> Anushka Srivastava</span>
+                    <span>Full Name: </span>
+                    <span id="fullNameText" class="copy-text">Anushka Srivastava</span>
                     <button class="copy-button" onclick="copyText('fullNameText')">Copy</button>
                 </div>
                 <div class="copy-container">
-                    <span>Bank Account No.:</span>
-                    <span id="accountNoText" class="copy-text"> 41449185065</span>
+                    <span>Bank Account No.: </span>
+                    <span id="accountNoText" class="copy-text">41449185065</span>
                     <button class="copy-button" onclick="copyText('accountNoText')">Copy</button>
                 </div>
                 <div class="copy-container">
-                    <span>Bank Name & IFSC Code:</span>
-                    <span id="bankDetailsText" class="copy-text"> State Bank of India & SBIN0003823</span>
+                    <span>Bank Name & IFSC Code: </span>
+                    <span id="bankDetailsText" class="copy-text">State Bank of India & SBIN0003823</span>
                     <button class="copy-button" onclick="copyText('bankDetailsText')">Copy</button>
                 </div>
             </div>
         </div>
         <p>Remitly handles the currency conversion, and the funds will be deposited directly into my account.</p>
-
     </div>
 
     <script>
